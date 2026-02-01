@@ -9,7 +9,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t %IMAGE% .'
+                bat "docker build -t %IMAGE% ."
             }
         }
 
@@ -20,8 +20,8 @@ pipeline {
                     usernameVariable: 'USER',
                     passwordVariable: 'PASS')]) {
 
-                    sh 'echo %PASS% | docker login -u %USER% --password-stdin'
-                    sh 'docker push %IMAGE%'
+                    bat "echo %PASS% | docker login -u %USER% --password-stdin"
+                    bat "docker push %IMAGE%"
                 }
             }
         }
