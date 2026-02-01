@@ -1,0 +1,1 @@
+Build image and use it inside AWS EC2 Auto Scaling Group launch template.
