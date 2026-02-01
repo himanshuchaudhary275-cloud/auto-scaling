@@ -2,20 +2,14 @@ pipeline {
     agent any
 
     environment {
-        IMAGE = "yourdockerhubusername/autoscale-app"
+        IMAGE = "him2100/autoscale-app"
     }
 
     stages {
 
-        stage('Clone') {
-            steps {
-                git 'https://github.com/yourusername/yourrepo.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE .'
+                sh 'docker build -t %IMAGE% .'
             }
         }
 
@@ -26,8 +20,8 @@ pipeline {
                     usernameVariable: 'USER',
                     passwordVariable: 'PASS')]) {
 
-                    sh 'echo $PASS | docker login -u $USER --password-stdin'
-                    sh 'docker push $IMAGE'
+                    sh 'echo %PASS% | docker login -u %USER% --password-stdin'
+                    sh 'docker push %IMAGE%'
                 }
             }
         }
